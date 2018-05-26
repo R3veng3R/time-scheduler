@@ -9,6 +9,7 @@ import org.mybatis.spring.MyBatisSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class TimeRecordService {
 
     @Transactional(rollbackFor = Exception.class)
     public void saveLocalData() {
-        if (isConnected) {
+        if (hasConnection()) {
             try {
                 timeRecordMapper.insertTimeList(TimeRecordBuffer.timeRecordBuffer);
                 LOG.info("Saved " + TimeRecordBuffer.timeRecordBuffer.size() + " timestamp record(s) to DB.");
@@ -59,16 +60,29 @@ public class TimeRecordService {
     }
 
     public void checkConnection() {
-        if (isConnected) {
-            return;
-        }
+//        if (isConnected) {
+//            return;
+//        }
+//
+//        try {
+//            this.timeRecordMapper.testConnection();
+//            isConnected = true;
+//
+//        } catch (MyBatisSystemException e) {
+//            LOG.warn("Unable to establish connection with database. Retrying in 5 secs.");
+//            isConnected = false;
+//        }
+        hasConnection();
+    }
 
+    public boolean hasConnection() {
         try {
             this.timeRecordMapper.testConnection();
             isConnected = true;
-
-        } catch (MyBatisSystemException e) {
+        } catch (DataAccessException e) {
             isConnected = false;
         }
+
+        return isConnected;
     }
 }

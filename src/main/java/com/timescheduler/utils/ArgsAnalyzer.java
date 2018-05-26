@@ -1,6 +1,6 @@
 package com.timescheduler.utils;
 
-import com.timescheduler.services.PrintTask;
+import com.timescheduler.tasks.PrintTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

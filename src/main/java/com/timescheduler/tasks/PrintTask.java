@@ -1,5 +1,6 @@
-package com.timescheduler.services;
+package com.timescheduler.tasks;
 
+import com.timescheduler.services.TimeRecordService;
 import com.timescheduler.utils.ArgsAnalyzer;
 import lombok.Setter;
 import org.slf4j.Logger;

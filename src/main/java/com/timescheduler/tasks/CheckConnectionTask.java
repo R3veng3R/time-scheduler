@@ -1,12 +1,12 @@
-package com.timescheduler.services;
+package com.timescheduler.tasks;
 
+import com.timescheduler.services.TimeRecordService;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.CannotCreateTransactionException;
 
 /**
  * Created by ALEX on 26.05.2018.
@@ -30,7 +30,7 @@ public class CheckConnectionTask {
         try {
             timeRecordService.checkConnection();
 
-        } catch (CannotCreateTransactionException e) {
+        } catch (Exception e) {
             LOG.warn("Unable to establish connection with database. Retrying in 5 secs.");
         }
     }

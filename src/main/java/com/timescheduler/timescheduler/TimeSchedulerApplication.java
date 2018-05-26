@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@ComponentScan("com.timescheduler.services")
+@ComponentScan({"com.timescheduler.services", "com.timescheduler.tasks"})
 @MappedTypes(TimeRecord.class)
 @MapperScan("com.timescheduler.mappers")
 @EnableScheduling

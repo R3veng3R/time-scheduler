@@ -1,5 +1,6 @@
-package com.timescheduler.services;
+package com.timescheduler.tasks;
 
+import com.timescheduler.services.TimeRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class SaveLocalDataTask {
             } catch (CannotCreateTransactionException e) {
                 LOG.warn("Unable to establish connection with database." +
                         "The data will be saved as soon as connection is available.");
+
+                TimeRecordService.isConnected = false;
             }
         }
     }
