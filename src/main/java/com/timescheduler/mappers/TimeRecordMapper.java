@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Mapper
 public interface TimeRecordMapper {
-    @Select("SELECT * FROM " + AppConstants.TIME_RECORD_TABLE_NAME)
+    @Select("SELECT id, timestamp FROM " + AppConstants.TIME_RECORD_TABLE_NAME)
     List<TimeRecord> getAll();
 
     @Insert("INSERT INTO " + AppConstants.TIME_RECORD_TABLE_NAME + " (timestamp) VALUES(#{timestamp})")

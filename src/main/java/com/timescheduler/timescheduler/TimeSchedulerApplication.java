@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Log
 public class TimeSchedulerApplication {
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 		if (ArgsAnalyzer.canStartApp(args)) {
 			log.info("Starting Application...");
 			SpringApplication.run(TimeSchedulerApplication.class, args);
@@ -33,7 +33,7 @@ public class TimeSchedulerApplication {
 	}
 
 	private static void shutDown() {
-		log.info("Application does not support these arguments. Use -p, or no arguments, please.");
+		log.info("Application does not support these arguments. Use -p or no arguments, please.");
 		log.info("Application will now shut down.");
 		System.exit(0);
 	}

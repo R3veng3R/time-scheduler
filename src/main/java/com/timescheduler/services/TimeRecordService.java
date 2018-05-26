@@ -10,6 +10,8 @@ import org.mybatis.spring.MyBatisSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,19 +29,19 @@ import java.util.List;
 @Component
 @Log
 public class TimeRecordService {
-    private TimeRecordMapper timeRecordMapper;
-    private DataSource dataSource;
     public static boolean isConnected = true;
+    private TimeRecordMapper timeRecordMapper;
+    private ConfigurableApplicationContext context;
 
     @Autowired
-    public TimeRecordService(TimeRecordMapper timeRecordMapper, DataSource dataSource) {
+    public TimeRecordService(TimeRecordMapper timeRecordMapper, ConfigurableApplicationContext context) {
         this.timeRecordMapper = timeRecordMapper;
-        this.dataSource = dataSource;
+        this.context = context;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void saveLocalData() {
-        if (hasConnection()) {
+        if (isConnected) {
             try {
                 timeRecordMapper.insertTimeList(TimeRecordBuffer.timeRecordBuffer);
                 log.info("Saved " + TimeRecordBuffer.timeRecordBuffer.size() + " timestamp record(s) to DB.");
@@ -61,23 +63,18 @@ public class TimeRecordService {
 
         } finally {
             log.info("Shutting down application...");
-            System.exit(0);
+            System.exit(SpringApplication.exit(this.context));
         }
     }
 
     public void checkConnection() {
-        hasConnection();
-    }
-
-    public boolean hasConnection() {
         try {
             this.timeRecordMapper.testConnection();
             isConnected = true;
 
         } catch (DataAccessException e) {
+            log.info("Unable to establish connection with database. Retrying in 5 secs.");
             isConnected = false;
         }
-
-        return isConnected;
     }
 }

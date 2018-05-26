@@ -28,6 +28,14 @@ public class ArgsAnalyzerTest {
     }
 
     @Test
+    public void printEnabledTest() {
+        String[] args = new String[] {"-p"};
+        ArgsAnalyzer.canStartApp(args);
+        boolean result = ArgsAnalyzer.hasPrintCommand;
+        assertTrue(result);
+    }
+
+    @Test
     public void randomArgumentsTest() {
         String[] args = new String[] {"-ppp", "---p", "-asd"};
         boolean result = ArgsAnalyzer.canStartApp(args);

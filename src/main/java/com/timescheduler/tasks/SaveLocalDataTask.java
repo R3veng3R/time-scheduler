@@ -30,7 +30,7 @@ public class SaveLocalDataTask {
 
             } catch (CannotCreateTransactionException e) {
                 log.info("Unable to establish connection with database." +
-                        "The data will be saved as soon as connection is available.");
+                        "The data will be saved as soon as connection is restored.");
 
                 TimeRecordService.isConnected = false;
             }
