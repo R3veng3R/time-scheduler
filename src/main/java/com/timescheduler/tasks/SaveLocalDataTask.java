@@ -24,8 +24,6 @@ public class SaveLocalDataTask {
 
     @Scheduled(fixedRate = 1000)
     public void saveRecordsToDB() {
-        log.info("saveRecordsToDB");
-
         if (TimeRecordService.isConnected) {
             try {
                 timeRecordService.saveLocalData();

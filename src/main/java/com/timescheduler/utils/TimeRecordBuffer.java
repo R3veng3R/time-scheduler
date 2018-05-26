@@ -24,6 +24,8 @@ public class TimeRecordBuffer {
         TimeRecord timeRecord = new TimeRecord();
         timeRecord.setTimestamp(new Timestamp(System.currentTimeMillis()));
         timeRecordBuffer.add(timeRecord);
-        log.info("BUFFER HAS: " + timeRecordBuffer.size());
+
+        log.info("Records ready to be saved: " + timeRecordBuffer.size() +
+                ". Last added time record was: " + AppConstants.DATE_FORMAT.format(timeRecord.getTimestamp()));
     }
 }

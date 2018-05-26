@@ -39,7 +39,6 @@ public class TimeRecordService {
 
     @Transactional(rollbackFor = Exception.class)
     public void saveLocalData() {
-
         if (hasConnection()) {
             try {
                 timeRecordMapper.insertTimeList(TimeRecordBuffer.timeRecordBuffer);
@@ -74,6 +73,7 @@ public class TimeRecordService {
         try {
             this.timeRecordMapper.testConnection();
             isConnected = true;
+
         } catch (DataAccessException e) {
             isConnected = false;
         }
