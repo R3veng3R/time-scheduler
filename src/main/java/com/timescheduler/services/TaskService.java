@@ -90,6 +90,7 @@ public class TaskService {
             LOG.warn("Unable to establish connection with database. Application will now shut down");
 
         } finally {
+            LOG.info("Shutting down application...");
             System.exit(0);
         }
     }

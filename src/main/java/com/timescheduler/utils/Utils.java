@@ -13,6 +13,7 @@ public class Utils {
     private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
 
     public static void printTable(List<TimeRecord> timeRecordList) {
+        System.out.println();
         System.out.format("+------+---------------------+%n");
         System.out.format("| ID   | TimeStamp           |%n");
         System.out.format("+------+---------------------+%n");
@@ -28,6 +29,6 @@ public class Utils {
 
         System.out.format("+------+---------------------+%n");
         System.out.println("TOTAL RECORDS: " + timeRecordList.size());
-        LOG.info("Shutting down application...");
+        System.out.println();
     }
 }
