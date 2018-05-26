@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 26 2018 г., 02:02
+-- Время создания: Май 26 2018 г., 10:24
 -- Версия сервера: 10.0.24-MariaDB
 -- Версия PHP: 5.4.45
 
@@ -23,22 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `time_table`
+-- Структура таблицы `time_record`
 --
 
-CREATE TABLE IF NOT EXISTS `time_table` (
+CREATE TABLE IF NOT EXISTS `time_record` (
   `id` int(11) NOT NULL,
   `timestamp` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `time_table`
+-- Индексы таблицы `time_record`
 --
-ALTER TABLE `time_table`
+ALTER TABLE `time_record`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -46,10 +46,10 @@ ALTER TABLE `time_table`
 --
 
 --
--- AUTO_INCREMENT для таблицы `time_table`
+-- AUTO_INCREMENT для таблицы `time_record`
 --
-ALTER TABLE `time_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+ALTER TABLE `time_record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

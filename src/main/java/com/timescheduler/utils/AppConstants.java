@@ -8,5 +8,6 @@ import java.text.SimpleDateFormat;
 public class AppConstants {
     public static final String PRINT_COMMAND = "-p";
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    public static final String TIME_RECORD_TABLE_NAME = "time_record";
 }
 

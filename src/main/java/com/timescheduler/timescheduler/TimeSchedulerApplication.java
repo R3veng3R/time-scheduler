@@ -1,6 +1,6 @@
 package com.timescheduler.timescheduler;
 
-import com.timescheduler.model.TimeTable;
+import com.timescheduler.model.TimeRecord;
 import org.apache.ibatis.type.MappedTypes;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @ComponentScan("com.timescheduler.services")
-@MappedTypes(TimeTable.class)
+@MappedTypes(TimeRecord.class)
 @MapperScan("com.timescheduler.mappers")
 @EnableScheduling
 @EnableTransactionManagement

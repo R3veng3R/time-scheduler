@@ -1,7 +1,7 @@
 package com.timescheduler.services;
 
-import com.timescheduler.mappers.TimeTableMapper;
-import com.timescheduler.model.TimeTable;
+import com.timescheduler.mappers.TimeRecordMapper;
+import com.timescheduler.model.TimeRecord;
 import com.timescheduler.utils.AppConstants;
 import com.timescheduler.utils.Utils;
 import lombok.Setter;
@@ -26,9 +26,9 @@ import java.util.List;
 @Component
 public class TaskService {
     private static final Logger LOG = LoggerFactory.getLogger(TaskService.class);
-    private ArrayList<TimeTable> timeTableBuffer = new ArrayList<>();
+    private ArrayList<TimeRecord> timeRecordBuffer = new ArrayList<>();
 
-    @Autowired private TimeTableMapper timeTableMapper;
+    @Autowired private TimeRecordMapper timeRecordMapper;
     @Autowired private ApplicationArguments appArgs;
 
     private boolean isConnected = true;
@@ -52,7 +52,7 @@ public class TaskService {
         }
 
         try {
-            this.timeTableMapper.testConnection();
+            this.timeRecordMapper.testConnection();
             isConnected = true;
 
         } catch (MyBatisSystemException e) {
@@ -65,10 +65,9 @@ public class TaskService {
     private void saveCurrentTimeStamp() {
         if (isConnected) {
             try {
-                this.timeTableMapper.insertTimeList(this.timeTableBuffer);
-                LOG.info("Inserted " + this.timeTableBuffer.size() + " record(s) to DB.");
-
-                this.timeTableBuffer.clear();
+                this.timeRecordMapper.insertTimeList(this.timeRecordBuffer);
+                LOG.info("Inserted " + this.timeRecordBuffer.size() + " record(s) to DB.");
+                this.timeRecordBuffer.clear();
 
             } catch (MyBatisSystemException e) {
                 // THIS BLOCK WILL CATCH ALL THE DATABASE EXCEPTIONS INCLUDING:
@@ -84,8 +83,8 @@ public class TaskService {
 
     private void printTimeTable() {
         try {
-            List<TimeTable> timeTableList = this.timeTableMapper.getAll();
-            Utils.printTable(timeTableList);
+            List<TimeRecord> timeRecordList = this.timeRecordMapper.getAll();
+            Utils.printTable(timeRecordList);
 
         } catch (MyBatisSystemException e) {
             LOG.warn("Unable to establish connection with database. Application will now shut down");
@@ -96,9 +95,9 @@ public class TaskService {
     }
 
     private void addTimeRecord() {
-        TimeTable timeRecord = new TimeTable();
+        TimeRecord timeRecord = new TimeRecord();
         timeRecord.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        this.timeTableBuffer.add(timeRecord);
+        this.timeRecordBuffer.add(timeRecord);
     }
 
     private boolean hasPrintCommand() {

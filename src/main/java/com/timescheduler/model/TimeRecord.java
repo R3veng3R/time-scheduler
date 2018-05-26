@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  */
 @Getter
 @Setter
-public class TimeTable {
+public class TimeRecord {
     private Long id;
     private Timestamp timestamp;
 }
