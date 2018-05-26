@@ -1,6 +1,6 @@
 package com.timescheduler.utils;
 
-import com.timescheduler.services.SchedulerService;
+import com.timescheduler.services.PrintTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  * Created by ALEX on 26.05.2018.
  */
 public class ArgsAnalyzer {
-    private static final Logger LOG = LoggerFactory.getLogger(SchedulerService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PrintTask.class);
     public static boolean hasPrintCommand = false;
 
     public static boolean canStartApp(String[] args) {

@@ -19,18 +19,18 @@ import java.util.List;
  */
 @Setter
 @Component
-@Transactional(rollbackFor = Exception.class)
 public class TimeRecordService {
-    private static final Logger LOG = LoggerFactory.getLogger(SchedulerService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TimeRecordService.class);
 
     private TimeRecordMapper timeRecordMapper;
-    private boolean isConnected;
+    public static boolean isConnected = true;
 
     @Autowired
     public TimeRecordService(TimeRecordMapper timeRecordMapper) {
         this.timeRecordMapper = timeRecordMapper;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void saveLocalData() {
         if (isConnected) {
             try {
@@ -39,12 +39,6 @@ public class TimeRecordService {
                 TimeRecordBuffer.timeRecordBuffer.clear();
 
             } catch (MyBatisSystemException e) {
-                // THIS BLOCK WILL CATCH ALL THE DATABASE EXCEPTIONS INCLUDING:
-                // JDBCConnectionException, CommunicationsException, SQLTimeoutException
-                // UNFORTUNATELY, I COULDN'T FIND OTHER WAYS TO CATCH THEM AS THEY ARE ALL NESTED INSIDE THE FRAMEWORK
-                // IF IT WOULD HAVE BEEN A WEB APP, I COULD WRITE MY OWN EXCEPTIONHANDLER CLASS AND HANDLE THEM THERE
-                LOG.warn("Unable to establish connection with database. It might be busy" +
-                        "The data will be saved as soon as connection is available.");
                 isConnected = false;
             }
         }
@@ -71,11 +65,9 @@ public class TimeRecordService {
 
         try {
             this.timeRecordMapper.testConnection();
-            saveLocalData();
             isConnected = true;
 
         } catch (MyBatisSystemException e) {
-            LOG.warn("Unable to establish connection with database. Retrying in 5 secs.");
             isConnected = false;
         }
     }
