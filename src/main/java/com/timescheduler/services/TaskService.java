@@ -28,8 +28,7 @@ public class TaskService {
     private static final Logger LOG = LoggerFactory.getLogger(TaskService.class);
     private ArrayList<TimeTable> timeTableBuffer = new ArrayList<>();
 
-    @Autowired
-    private TimeTableMapper timeTableMapper;
+    @Autowired private TimeTableMapper timeTableMapper;
     @Autowired private ApplicationArguments appArgs;
 
     private boolean isConnected = true;
