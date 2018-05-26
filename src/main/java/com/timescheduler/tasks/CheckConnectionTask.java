@@ -2,6 +2,7 @@ package com.timescheduler.tasks;
 
 import com.timescheduler.services.TimeRecordService;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Setter
 @Component
+@Log
 public class CheckConnectionTask {
-    private static final Logger LOG = LoggerFactory.getLogger(CheckConnectionTask.class);
-
     private TimeRecordService timeRecordService;
 
     @Autowired
@@ -25,13 +25,11 @@ public class CheckConnectionTask {
 
     @Scheduled(fixedRate = 5000)
     public void checkConnection() {
-        LOG.info("checkConnection()");
-
         try {
             timeRecordService.checkConnection();
 
         } catch (Exception e) {
-            LOG.warn("Unable to establish connection with database. Retrying in 5 secs.");
+            log.info("Unable to establish connection with database. Retrying in 5 secs.");
         }
     }
 }

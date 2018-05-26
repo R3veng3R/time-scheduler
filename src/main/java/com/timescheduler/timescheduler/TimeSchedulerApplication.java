@@ -2,6 +2,7 @@ package com.timescheduler.timescheduler;
 
 import com.timescheduler.model.TimeRecord;
 import com.timescheduler.utils.ArgsAnalyzer;
+import lombok.extern.java.Log;
 import org.apache.ibatis.type.MappedTypes;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -18,13 +19,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.timescheduler.mappers")
 @EnableScheduling
 @EnableTransactionManagement
+@Log
 public class TimeSchedulerApplication {
-	private static final Logger LOG = LoggerFactory.getLogger(TimeSchedulerApplication.class);
-
 	public static void main(String[] args) {
 
 		if (ArgsAnalyzer.canStartApp(args)) {
-			LOG.info("Starting Application...");
+			log.info("Starting Application...");
 			SpringApplication.run(TimeSchedulerApplication.class, args);
 
 		} else {
@@ -33,8 +33,8 @@ public class TimeSchedulerApplication {
 	}
 
 	private static void shutDown() {
-		LOG.info("Application does not support these arguments. Use -p, or no arguments, please.");
-		LOG.info("Application will now shut down.");
+		log.info("Application does not support these arguments. Use -p, or no arguments, please.");
+		log.info("Application will now shut down.");
 		System.exit(0);
 	}
 }

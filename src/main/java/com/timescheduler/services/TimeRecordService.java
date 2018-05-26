@@ -3,8 +3,9 @@ package com.timescheduler.services;
 import com.timescheduler.mappers.TimeRecordMapper;
 import com.timescheduler.model.TimeRecord;
 import com.timescheduler.utils.TimeRecordBuffer;
-import com.timescheduler.utils.Utils;
+import com.timescheduler.utils.TablePrintUtil;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import org.mybatis.spring.MyBatisSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 import java.util.List;
 
 /**
@@ -20,23 +25,25 @@ import java.util.List;
  */
 @Setter
 @Component
+@Log
 public class TimeRecordService {
-    private static final Logger LOG = LoggerFactory.getLogger(TimeRecordService.class);
-
     private TimeRecordMapper timeRecordMapper;
+    private DataSource dataSource;
     public static boolean isConnected = true;
 
     @Autowired
-    public TimeRecordService(TimeRecordMapper timeRecordMapper) {
+    public TimeRecordService(TimeRecordMapper timeRecordMapper, DataSource dataSource) {
         this.timeRecordMapper = timeRecordMapper;
+        this.dataSource = dataSource;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void saveLocalData() {
+
         if (hasConnection()) {
             try {
                 timeRecordMapper.insertTimeList(TimeRecordBuffer.timeRecordBuffer);
-                LOG.info("Saved " + TimeRecordBuffer.timeRecordBuffer.size() + " timestamp record(s) to DB.");
+                log.info("Saved " + TimeRecordBuffer.timeRecordBuffer.size() + " timestamp record(s) to DB.");
                 TimeRecordBuffer.timeRecordBuffer.clear();
 
             } catch (MyBatisSystemException e) {
@@ -48,30 +55,18 @@ public class TimeRecordService {
     public void printTimeTable() {
         try {
             List<TimeRecord> timeRecordList = this.timeRecordMapper.getAll();
-            Utils.printTable(timeRecordList);
+            TablePrintUtil.print(timeRecordList);
 
         } catch (MyBatisSystemException e) {
-            LOG.warn("Unable to establish connection with database. Application will now shut down");
+            log.info("Unable to establish connection with database. Application will now shut down");
 
         } finally {
-            LOG.info("Shutting down application...");
+            log.info("Shutting down application...");
             System.exit(0);
         }
     }
 
     public void checkConnection() {
-//        if (isConnected) {
-//            return;
-//        }
-//
-//        try {
-//            this.timeRecordMapper.testConnection();
-//            isConnected = true;
-//
-//        } catch (MyBatisSystemException e) {
-//            LOG.warn("Unable to establish connection with database. Retrying in 5 secs.");
-//            isConnected = false;
-//        }
         hasConnection();
     }
 
