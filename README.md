@@ -16,7 +16,7 @@ A test project.
 
 ## Built With
 
-* [SpringBoot](https://projects.spring.io/spring-boot/) - The web framework used
+* [SpringBoot](https://projects.spring.io/spring-boot/) - The Framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [MyBatis](http://blog.mybatis.org/) - DB connection
 * [Project Lombok](https://projectlombok.org/) - for getters/setters and log
