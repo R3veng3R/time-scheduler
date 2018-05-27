@@ -10,5 +10,11 @@ A test project.
 6. use command line to start the project:
 ```
     java -jar time-scheduler-0.0.1-SNAPSHOT.jar -p  - Prints out the current database records.
-    java -jar time-scheduler-0.0.1-SNAPSHOT.jar     - Starts as normal and adds record every second
+    java -jar time-scheduler-0.0.1-SNAPSHOT.jar     - Starts as normal and adds a record every second
 ```
+
+## Built With
+
+* [SpringBoot](https://projects.spring.io/spring-boot/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [MyBatis](http://blog.mybatis.org/)
