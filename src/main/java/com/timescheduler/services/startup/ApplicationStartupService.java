@@ -1,4 +1,4 @@
-package com.timescheduler.services;
+package com.timescheduler.services.startup;
 
 import com.timescheduler.utils.DataAccessExceptionMessageHandler;
 import com.timescheduler.utils.DatabaseUtils;

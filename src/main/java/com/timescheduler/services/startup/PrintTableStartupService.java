@@ -1,4 +1,4 @@
-package com.timescheduler.tasks;
+package com.timescheduler.services.startup;
 
 import com.timescheduler.services.TimeRecordService;
 import com.timescheduler.utils.ArgsAnalyzer;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 @Log
-public class PrintTask {
+public class PrintTableStartupService {
 
     @Autowired
-    public PrintTask(TimeRecordService timeRecordService, Environment environment) {
+    public PrintTableStartupService(TimeRecordService timeRecordService, Environment environment) {
         if (ArgsAnalyzer.hasPrintCommand) {
             timeRecordService.printTimeTable();
         }
