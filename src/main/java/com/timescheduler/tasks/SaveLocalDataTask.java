@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.CannotCreateTransactionException;
 
 /**
+ * Saves all the records that are
+ * currently waiting in the queue
+ *
  * Created by ALEX on 26.05.2018.
  */
 @Component

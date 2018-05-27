@@ -9,6 +9,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
+ * Service that prints out Table on initialization
+ * and then stops the application
+ *
  * Created by ALEX on 26.05.2018.
  */
 @Setter
