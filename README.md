@@ -6,7 +6,7 @@ A test project.
 2. Setup MySQL database with the included script in database folder.
 3. Setup DB connection in application.properties
 4. use mvn package to build the project
-5. Start DB (!This is important, the DB must be accessible on runtime)
+5. Start DB (!This is important, the DB must be accessible )
 6. Go to the project directory /target
 7. use command line to start the project:
 ```
