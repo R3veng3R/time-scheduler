@@ -1,9 +1,6 @@
 package com.timescheduler.utils;
 
-import com.timescheduler.tasks.PrintTask;
 import lombok.extern.java.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by ALEX on 26.05.2018.

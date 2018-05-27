@@ -2,9 +2,6 @@ package com.timescheduler.utils;
 
 import com.timescheduler.model.TimeRecord;
 import lombok.extern.java.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 /**

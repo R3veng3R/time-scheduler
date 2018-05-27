@@ -3,9 +3,8 @@ package com.timescheduler.services;
 import com.timescheduler.mappers.TimeRecordMapper;
 import com.timescheduler.model.TimeRecord;
 import com.timescheduler.utils.DataAccessExceptionMessageHandler;
-import com.timescheduler.utils.TimeRecordBuffer;
 import com.timescheduler.utils.TablePrintUtil;
-import com.zaxxer.hikari.HikariDataSource;
+import com.timescheduler.utils.TimeRecordBuffer;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
 import java.util.List;
 
 /**

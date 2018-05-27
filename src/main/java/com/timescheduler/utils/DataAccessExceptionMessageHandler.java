@@ -2,8 +2,6 @@ package com.timescheduler.utils;
 
 import lombok.extern.java.Log;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.QueryTimeoutException;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
 
 /**
  * Created by ALEX on 27.05.2018.
