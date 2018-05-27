@@ -19,7 +19,7 @@ public class CheckConnectionTask {
         this.timeRecordService = timeRecordService;
     }
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void checkConnection() {
         timeRecordService.hasConnection();
     }

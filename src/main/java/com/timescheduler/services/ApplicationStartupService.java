@@ -53,7 +53,6 @@ public class ApplicationStartupService {
 
             if (errorMessage.contains("Communications link failure")) {
                 message = DataAccessExceptionMessageHandler.getLogMessage(new DataAccessException("CommunicationsLinkFailure") { });
-                log.info(message);
 
             } else if (errorMessage.contains("Unknown database")) {
                 message =  errorMessage + " " + "Have you setup the database correctly?";

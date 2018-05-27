@@ -16,11 +16,11 @@ public class DataAccessExceptionMessageHandler {
         if ( errorMessage.contains("Timeout"))
             result = AppConstants.UNABLE_TO_GET_DATA_ERROR_MSG;
 
-        if ( errorMessage.contains("CannotGetJdbcConnectionException"))
+        if ( errorMessage.contains("CannotGetJdbcConnectionException") || errorMessage.contains("CommunicationsLinkFailure"))
             result = AppConstants.NO_CONNECTION_ERROR_MSG;
 
-        if (errorMessage.contains("CommunicationsLinkFailure"))
-            result = AppConstants.NO_CONNECTION_ERROR_MSG;
+        if ( errorMessage.contains("PersistenceException"))
+            result = AppConstants.INTERRUPT_CONNECTION_ERROR_MSG;
 
         return result;
     }
