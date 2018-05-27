@@ -18,3 +18,4 @@ A test project.
 * [SpringBoot](https://projects.spring.io/spring-boot/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [MyBatis](http://blog.mybatis.org/)
+* [Project Lombok] (https://projectlombok.org/)
