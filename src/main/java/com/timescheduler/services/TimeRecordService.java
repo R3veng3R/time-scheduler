@@ -2,13 +2,12 @@ package com.timescheduler.services;
 
 import com.timescheduler.mappers.TimeRecordMapper;
 import com.timescheduler.model.TimeRecord;
+import com.timescheduler.utils.DataAccessExceptionMessageHandler;
 import com.timescheduler.utils.TimeRecordBuffer;
 import com.timescheduler.utils.TablePrintUtil;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import org.mybatis.spring.MyBatisSystemException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,10 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
 import java.util.List;
 
 /**
@@ -47,7 +43,7 @@ public class TimeRecordService {
                 log.info("Saved " + TimeRecordBuffer.timeRecordBuffer.size() + " timestamp record(s) to DB.");
                 TimeRecordBuffer.timeRecordBuffer.clear();
 
-            } catch (MyBatisSystemException e) {
+            } catch (DataAccessException e) {
                 isConnected = false;
             }
         }
@@ -58,8 +54,9 @@ public class TimeRecordService {
             List<TimeRecord> timeRecordList = this.timeRecordMapper.getAll();
             TablePrintUtil.print(timeRecordList);
 
-        } catch (MyBatisSystemException e) {
-            log.info("Unable to establish connection with database. Application will now shut down");
+        } catch (DataAccessException e) {
+            log.info(DataAccessExceptionMessageHandler.getLogMessage(e));
+            log.info("Application will now shut down...");
 
         } finally {
             log.info("Shutting down application...");
@@ -67,14 +64,16 @@ public class TimeRecordService {
         }
     }
 
-    public void checkConnection() {
+    public boolean hasConnection() {
         try {
             this.timeRecordMapper.testConnection();
             isConnected = true;
 
         } catch (DataAccessException e) {
-            log.info("Unable to establish connection with database. Retrying in 5 secs.");
+            log.info(DataAccessExceptionMessageHandler.getLogMessage(e));
             isConnected = false;
         }
+
+        return isConnected;
     }
 }

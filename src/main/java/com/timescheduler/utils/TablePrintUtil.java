@@ -13,14 +13,14 @@ import java.util.List;
 @Log
 public class TablePrintUtil {
     public static void print(List<TimeRecord> timeRecordList) {
-        System.out.println();
+        log.info("");
         log.info("+------+---------------------+");
         log.info("| ID   | TimeStamp           |");
         log.info("+------+---------------------+");
 
         String formatMessage;
         for (TimeRecord record : timeRecordList) {
-           formatMessage =  String.format("| %-4d | %-15s |", record.getId(),
+           formatMessage = String.format("| %-4d | %-15s |", record.getId(),
                     AppConstants.DATE_FORMAT.format(record.getTimestamp()));
 
             log.info(formatMessage);
@@ -32,6 +32,6 @@ public class TablePrintUtil {
 
         log.info("+------+---------------------+");
         log.info("TOTAL RECORDS: " + timeRecordList.size());
-        System.out.println();
+        log.info("");
     }
 }

@@ -1,10 +1,7 @@
 package com.timescheduler.tasks;
 
 import com.timescheduler.services.TimeRecordService;
-import lombok.Setter;
 import lombok.extern.java.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,6 +21,6 @@ public class CheckConnectionTask {
 
     @Scheduled(fixedRate = 5000)
     public void checkConnection() {
-        timeRecordService.checkConnection();
+        timeRecordService.hasConnection();
     }
 }
